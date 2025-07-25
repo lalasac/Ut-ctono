@@ -43,6 +43,16 @@ button {
     position: relative; /* opcional: evitar superposición */
     margin-bottom: 1rem;
   }
+
+  .nosotros-contenido {
+    flex-direction: column;
+  }
+
+  .img-nosotros,
+  .texto-nosotros {
+    flex: none;
+    width: 100%;
+  }
 }
 
 /* Parte superior rosa */
@@ -165,7 +175,7 @@ button {
 
 /* Título destacado */
 .bienvenida-texto h1 {
-  font-size: clamp(1.6rem, 4vw, 3rem); /* escala responsiva */
+  font-size: clamp(2rem, 6vw, 3rem); /* Más grande en móviles */
   color: var(--fucsia);
   font-weight: regular;
   text-shadow: 1px 1px var(--azul-oscuro);
@@ -174,8 +184,9 @@ button {
 
 /* Texto intermedio */
 .bienvenida-texto p {
-  font-size: clamp(1rem, 2.2vw, 1.4rem);
+  font-size: clamp(1.1rem, 3vw, 1.4rem); /* Más grande en móviles */
   margin-bottom: 1rem;
+  font-family: "Oswald", sans-serif;
 }
 
 /* Palabra destacada */
@@ -195,7 +206,7 @@ button {
 .bienvenida-texto ul {
   list-style: disc;
   text-align: left;
-  font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+  font-size: clamp(1rem, 2.5vw, 1.2rem); /* Más grande en móviles */
   padding-left: 1.5rem;
   margin: 1.5rem auto 0 auto;
   max-width: 90%;
@@ -204,7 +215,8 @@ button {
 @media (max-width: 480px) {
   .bienvenida-texto {
     top: 18%;
-    width: 90%;
+    width: 95%;
+    padding: 0.5rem;
   }
 
   .bienvenida-texto ul {
@@ -258,8 +270,8 @@ article {
   margin-left: 0px;
   display: flex;
   height: auto;
-  color: var(--fucsia)
-  font-family: 'Oswald', sans-serif;
+  color: var(--fucsia);
+  font-family: 'Oswald', sans-serif; 
 }
 
 #nosotros p {
@@ -289,7 +301,26 @@ article {
   padding: 3rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  align-items: flex-start; /* ← Esto alinea el contenido a la izquierda */
+  text-align: start;
+  max-width: 600px;      /* Limita el ancho en pantallas grandes */
+  box-sizing: border-box;
+  word-break: break-word; /* Evita desbordamiento por palabras largas */
+}
+
+@media (max-width: 768px) {
+  .texto-nosotros {
+    padding: 1.5rem;
+    max-width: 100%;     /* Permite que use todo el ancho disponible */
+  }
+}
+
+@media (max-width: 480px) {
+  .texto-nosotros {
+    padding: 1rem;
+    font-size: 1rem;     /* Reduce el tamaño de fuente si es necesario */
+  }
 }
 
 .texto-nosotros h2{
@@ -305,12 +336,12 @@ article {
   text-transform: uppercase;}
 
   @media (max-width: 768px) {
-    .nosotros {
+    .nosotros-contenido {
       flex-direction: column;
     }
   
-    .nosotros-img,
-    .nosotros-texto {
+    .img-nosotros,
+    .texto-nosotros {
       flex: none;
       width: 100%;
     }
@@ -335,15 +366,10 @@ article h2 {
   margin-bottom: 15px;
 }
 
-article h5,
-h3 {
-  color: var(--crema);
-  margin-top: 20px;
-}
-
 article h4 {
-  color: var(--azul-oscuro);
+  color: var(--fucsia);
   margin-top: 20px;
+  text-align: center;
 }
 
 article p,
@@ -358,6 +384,184 @@ ul {
 
 ul li {
   margin-bottom: 8px;
+}
+
+.servicios {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  background-color: var(--azul-oscuro); /* azul oscuro */
+  padding: 3rem;
+  gap: 5rem;
+  flex-wrap: wrap; /* por si se reduce el ancho en móviles */
+}
+
+.servicio {
+  position: relative;
+  width: 180px;
+  max-width: 260px;
+  text-align: center;
+  flex: 1 1 200px;
+}
+
+.servicio .icono img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.icono {
+  width: 100%;
+}
+
+.icono svg {
+  width: 100%;
+  height: fit-content;
+  display: block;
+}
+
+.texto-servicio {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--crema); /* o el color que uses */
+  font-family: 'Oswald', sans-serif;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  width: 80%;
+  text-align: center;
+  text-transform: uppercase;
+  pointer-events: none; /* evita que el texto bloquee clics en el SVG */
+}
+
+/*hamburguesa animación*/
+.imagen-hover {
+  overflow: hidden;
+  display: block;      /* Cambia de inline-block a block */
+  margin: 0 auto;      /* Centra horizontalmente */
+  max-width: 100vw;
+}
+
+.imagen-hover img {
+  display: block;
+  transition: transform 0.5s ease;
+  max-width: 100vw;   /* Ajusta este valor según lo que necesites */
+  max-height: 100vw;  /* Ajusta este valor según lo que necesites */
+  width: 100%;
+  height: auto;
+}
+
+.imagen-hover:hover img {
+  transform: translateY(429px); /* Cambia este valor para ajustar cuánto se desplaza */
+}
+
+/*carrusel*/
+article h2 {
+  font-size: 2rem;
+  color: var(--fucsia);
+  text-transform: uppercase;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+   max-width: 600px;      /* Limita el ancho del texto */
+  margin: 0 auto 1.5rem; /* Centra el texto y agrega espacio abajo */
+  text-align: center;    /* Centra el texto dentro del párrafo */
+  }
+
+article h3 {
+  font-size: 2rem;
+  color: var(--azul-oscuro);
+  text-transform: uppercase;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+   max-width: 600px;      /* Limita el ancho del texto */
+  margin: 0 auto 1.5rem; /* Centra el texto y agrega espacio abajo */
+  text-align: center;    /* Centra el texto dentro del párrafo */
+  }
+
+article p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--azul-oscuro);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  max-width: 600px;      /* Limita el ancho del texto */
+  margin: 0 auto 1.5rem; /* Centra el texto y agrega espacio abajo */
+  text-align: center;    /* Centra el texto dentro del párrafo */
+}
+
+.carrusel {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.carrusel input[type="radio"] {
+  display: none;
+}
+
+.carrusel__inner {
+  display: flex;
+  width: 600px; /* Si usas width: 100vw en cada slide */
+  max-width: 100%; /* 4 slides x 600px */
+  transition: transform 0.5s ease;
+}
+
+.carrusel__slide {
+  width: 600px; /* O usa el mismo ancho que .carrusel, por ejemplo 600px */
+  max-width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0;
+  min-height: 300px;
+}
+
+.carrusel__slide img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  display: block;
+}
+
+#slide1:checked ~ .carrusel__inner {
+  transform: translateX(0%);
+}
+#slide2:checked ~ .carrusel__inner {
+  transform: translateX(-100%);
+}
+#slide3:checked ~ .carrusel__inner {
+  transform: translateX(-200%);
+}
+#slide4:checked ~ .carrusel__inner {
+  transform: translateX(-300%);
+}
+
+.carrusel__nav {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.carrusel__nav label {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin: 0 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carrusel__nav label:hover {
+  background-color: #555;
 }
 
 /* FOOTER */
@@ -376,7 +580,8 @@ footer {
   margin-bottom: 5px;
   color: var(--crema);
   text-decoration: none;
-  font-weight: bold;
+  font-weight: regular;
+  text-transform: uppercase
 }
 
 .footer-right {
